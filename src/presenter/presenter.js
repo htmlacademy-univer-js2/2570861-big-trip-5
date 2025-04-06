@@ -3,7 +3,7 @@ import FormCreation from '../view/form-create';
 import FormEditing from '../view/form-edit';
 import PointEdit from '../view/point-edit';
 import Point from '../view/point';
-import Sorting from '../view/sorting.js/index.js';
+import Sorting from '../view/sorting';
 import { render } from '../render.js';
 
 const MAX_ROUTE_POINT_COUNT = 3;
