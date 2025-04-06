@@ -1,4 +1,3 @@
-
 import { createElement } from '../render';
 
 function createPointRouteListTemplate() {
