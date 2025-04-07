@@ -29,9 +29,8 @@ function createSortingTemplate() {
           </form>`;
 }
 
-export default class Sorting extends AbstractView {
+export default class SortingView extends AbstractView {
   get template() {
     return createSortingTemplate();
   }
 }
-

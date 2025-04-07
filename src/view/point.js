@@ -1,9 +1,9 @@
+import AbstractView from '../framework/view/abstract-view.js';
 import {formatEventTime} from '../utils.js';
 import {formatEventDate} from '../utils.js';
 import {getDestinationById} from '../utils.js';
 import {getOffersByType} from '../utils.js';
 import {formatEventDuration} from '../utils.js';
-import AbstractView from '../framework/view/abstract-view.js';
 
 function createPointRouteTemplate(event) {
   const {dateFrom, dateTo, basePrice, isFavourite, type} = event;
@@ -67,23 +67,31 @@ function createPointRouteTemplate(event) {
            </li>`;
 }
 
-export default class RoutePoint extends AbstractView {
-  #point = null;
-  #destinations = null;
+export default class Point extends AbstractView {
+  #event = null;
+  #handleEditClick = null;
+  #handleFavoriteClick = null;
 
-  constructor({point, destinations, onRollButtonClick}) {
+  constructor({event, onEditClick, onFavoriteClick}) {
     super();
-
-    this.#point = point;
-    this.#destinations = destinations;
-
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', (event) => {
-      event.preventDefault();
-      onRollButtonClick();
-    });
+    this.#event = event;
+    this.#handleEditClick = onEditClick;
+    this.#handleFavoriteClick = onFavoriteClick;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#editClickHandler);
+    this.element.querySelector('.event__favorite-btn').addEventListener('click', this.#favoriteClickHandler);
   }
 
   get template() {
-    return createPointRouteTemplate(this.#point, this.#destinations);
+    return createPointRouteTemplate(this.#event);
   }
+
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleEditClick();
+  };
+
+  #favoriteClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFavoriteClick();
+  };
 }
