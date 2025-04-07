@@ -1,9 +1,8 @@
+import AbstractView from '../framework/view/abstract-view.js';
 import {formatEventTime} from '../utils.js';
 import {formatFormEventDate} from '../utils.js';
 import {getDestinationById} from '../utils.js';
 import {getOffersByType} from '../utils.js';
-import AbstractView from '../framework/view/abstract-view.js';
-
 
 function makeFormEditingTemplate(event) {
   const {dateFrom, dateTo, basePrice, type } = event;
@@ -147,24 +146,25 @@ function makeFormEditingTemplate(event) {
             </li>`;
 }
 
-export default class FormEditing extends AbstractView{
-  #point = null;
-  #destinations = null;
+export default class FormEditing extends AbstractView {
+  #event = null;
+  #handleFormSubmit = null;
 
-  constructor({point, destinations, onRollButtonClick, onSubmitClick}) {
+  constructor({event, onFormSubmit}) {
     super();
+    this.#event = event;
+    this.#handleFormSubmit = onFormSubmit;
 
-    this.#point = point;
-    this.#destinations = destinations;
-
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', (event) => {
-      event.preventDefault();
-      onRollButtonClick();
-    });
-    this.element.querySelector('.event__save-btn').addEventListener('submit', onSubmitClick);
+    this.element.querySelector('form').addEventListener('submit', this.#formCloseHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formCloseHandler);
   }
 
   get template() {
-    return makeFormEditingTemplate(this.#point, this.#destinations);
+    return makeFormEditingTemplate(this.#event);
   }
+
+  #formCloseHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
+  };
 }

@@ -50,19 +50,31 @@ function formatEventDuration(startDate, endDate) {
   return `${durationInDays}D ${durationInHours}H ${durationInMinutes}M`;
 }
 
-function getRandomPrice(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
+
+const isPastEvent = (date) => dayjs(date).isBefore(dayjs());
+
+const isPresentEvent = (dateFrom, dateTo) => dayjs(dateFrom).isBefore(dayjs()) && dayjs(dateTo).isAfter(dayjs());
+
+const isFutureEvent = (date) => dayjs(date).isAfter(dayjs());
+
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
 }
 
 export {
-  getRandomPrice,
   getRandomArrayElement,
   formatEventDate,
   formatEventTime,
   getDestinationById,
   getOffersByType,
   formatEventDuration,
-  formatFormEventDate
+  formatFormEventDate,
+  isEscapeKey,
+  isFutureEvent,
+  isPastEvent,
+  isPresentEvent,
+  updateItem
 };
