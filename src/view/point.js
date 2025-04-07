@@ -1,9 +1,9 @@
-import { createElement } from '../render.js';
 import {formatEventTime} from '../utils.js';
 import {formatEventDate} from '../utils.js';
 import {getDestinationById} from '../utils.js';
 import {getOffersByType} from '../utils.js';
 import {formatEventDuration} from '../utils.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 function createPointRouteTemplate(event) {
   const {dateFrom, dateTo, basePrice, isFavourite, type} = event;
@@ -67,23 +67,23 @@ function createPointRouteTemplate(event) {
            </li>`;
 }
 
-export default class PointRoute {
-  constructor({event}) {
-    this.event = event;
+export default class RoutePoint extends AbstractView {
+  #point = null;
+  #destinations = null;
+
+  constructor({point, destinations, onRollButtonClick}) {
+    super();
+
+    this.#point = point;
+    this.#destinations = destinations;
+
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', (event) => {
+      event.preventDefault();
+      onRollButtonClick();
+    });
   }
 
-  getTemplate() {
-    return createPointRouteTemplate(this.event);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createPointRouteTemplate(this.#point, this.#destinations);
   }
 }
