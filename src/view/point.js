@@ -3,7 +3,7 @@ import {formatEventDate} from '../utils.js';
 import {getDestinationById} from '../utils.js';
 import {getOffersByType} from '../utils.js';
 import {formatEventDuration} from '../utils.js';
-import {AbstractView} from '../framework/view/abstract-view.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 function createPointRouteTemplate(event) {
   const {dateFrom, dateTo, basePrice, isFavourite, type} = event;
