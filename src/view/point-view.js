@@ -16,7 +16,6 @@ export default class PointView extends AbstractView {
     this.#offers = offers;
     this.#handleEditClick = onEditClick;
     this.#handleFavoriteClick = onFavoriteClick;
-
     this.#addPointHandlers();
   }
 

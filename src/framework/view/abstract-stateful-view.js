@@ -3,7 +3,6 @@ import AbstractView from './abstract-view.js';
 export default class AbstractStatefulView extends AbstractView {
   _state = {};
 
-
   updateElement(update) {
     if (!update) {
       return;
@@ -14,16 +13,15 @@ export default class AbstractStatefulView extends AbstractView {
     this.#rerenderElement();
   }
 
-
   _restoreHandlers() {
     throw new Error('Abstract method not implemented: restoreHandlers');
   }
-
 
   _setState(update) {
     this._state = structuredClone({...this._state, ...update});
   }
 
+  /** Метод для перерисовки элемента */
   #rerenderElement() {
     const prevElement = this.element;
     const parent = prevElement.parentElement;

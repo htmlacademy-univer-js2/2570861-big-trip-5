@@ -39,7 +39,7 @@ const filterModel = new FilterModel();
 
 // Презентеры
 const tripInfoPresenter = new TripInfoPresenter({
-  container        : tripMainElement,
+  container : tripMainElement,
   pointsModel,
   destinationsModel,
   offersModel,
@@ -50,13 +50,13 @@ const newPointButtonPresenter = new NewPointButtonPresenter({
 });
 
 const filterPresenter = new FilterPresenter({
-  container   : tripControlsElement,
+  container : tripControlsElement,
   pointsModel,
   filterModel,
 });
 
 const tripPresenter = new TripPresenter({
-  container              : tripEventsElement,
+  container : tripEventsElement,
   destinationsModel,
   offersModel,
   pointsModel,

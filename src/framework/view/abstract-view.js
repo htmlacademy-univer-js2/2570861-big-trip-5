@@ -7,7 +7,6 @@ const SHAKE_ANIMATION_TIMEOUT = 600;
 
 
 export default class AbstractView {
-
   #element = null;
 
   _callback = {};
@@ -45,4 +44,5 @@ export default class AbstractView {
     }, SHAKE_ANIMATION_TIMEOUT);
   }
 }
+
 
