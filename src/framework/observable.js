@@ -10,10 +10,7 @@ export default class Observable {
     this.#observers.add(observer);
   }
 
-  /**
-   * Метод, позволяющий отписаться от события
-   * @param {observerCallback} observer Функция, которую больше не нужно вызывать при наступлении события
-   */
+
   removeObserver(observer) {
     this.#observers.delete(observer);
   }
