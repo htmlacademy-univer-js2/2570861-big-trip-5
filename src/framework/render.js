@@ -60,10 +60,7 @@ function replace(newComponent, oldComponent) {
   parent.replaceChild(newElement, oldElement);
 }
 
-/**
- * Функция для удаления компонента
- * @param {AbstractView} component Компонент, который нужно удалить
- */
+
 function remove(component) {
   if (component === null) {
     return;
