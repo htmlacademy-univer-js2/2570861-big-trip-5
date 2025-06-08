@@ -15,11 +15,7 @@ export default class Observable {
     this.#observers.delete(observer);
   }
 
-  /**
-   * Метод для оповещения подписчиков о наступлении события
-   * @param {*} event Тип события
-   * @param {*} payload Дополнительная информация
-   */
+
   _notify(event, payload) {
     this.#observers.forEach((observer) => observer(event, payload));
   }
